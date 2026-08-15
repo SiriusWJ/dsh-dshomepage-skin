@@ -12,6 +12,10 @@
 ## 安装
 
 ```sh
+# npm（推荐）
+dsh plugin --profile web add dsh-homepage-skin
+
+# 或从 GitHub
 dsh plugin --profile web add github:yushi-xxh/dsh-homepage-skin
 ```
 

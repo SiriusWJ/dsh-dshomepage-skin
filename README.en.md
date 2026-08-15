@@ -12,6 +12,10 @@ Both themes are covered: dark keeps the deep-blue homepage palette, light gets a
 ## Install
 
 ```sh
+# npm (recommended)
+dsh plugin --profile web add dsh-homepage-skin
+
+# or from GitHub
 dsh plugin --profile web add github:yushi-xxh/dsh-homepage-skin
 ```
 
