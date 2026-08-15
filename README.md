@@ -1,51 +1,51 @@
 # dsh-homepage-skin
 
-[English](README.md) · [中文](README.zh.md)
+[中文](README.md) · [English](README.en.md)
 
-A background skin that brings the DeepSeek Harness homepage look — WebGL fluid light, dot-line grid and the digital point-cloud whale — into the `dsh web` interface.
+给 `dsh web` 界面铺上 DeepSeek Harness 首页同款背景：WebGL 流体光效、点线网格和数字点云鲸鱼。
 
-![Dark theme](docs/compare-dark.png)
-![Light theme](docs/compare-light.png)
+![深色主题](docs/compare-dark.png)
+![亮色主题](docs/compare-light.png)
 
-Both themes are covered: dark keeps the deep-blue homepage palette, light gets an adapted variant (light fluid ramp, dark slate grid and whale). Appearance (light / dark / follow system) is still handled by the built-in setting.
+深色沿用首页深海蓝配色；亮色是适配变体（浅色流体 + 深灰蓝网格与鲸鱼）。亮 / 暗 / 跟随系统仍走自带的「外观」。
 
-## Install
+## 安装
 
 ```sh
 dsh plugin --profile web add github:yushi-xxh/dsh-homepage-skin
 ```
 
-Restart `dsh web`, then hard-refresh the browser (Ctrl+Shift+R). Enabled by default.
+重启 `dsh web`，再硬刷新浏览器（Ctrl+Shift+R）。默认开启。
 
-Open **Settings → General → Homepage Skin**. The green dot next to the title means it is on.
+打开 **设置 → 通用 → 首页皮肤**。标题旁绿点表示已开启。
 
-## Verify
+## 装完怎么验
 
-| What you see | Meaning |
+| 现象 | 结论 |
 |---|---|
-| Fluid light + dot grid + whale behind the chat | Working |
-| Switch appearance to light → light variant appears | Working |
-| Toggle the skin off → background disappears instantly | Working |
+| 聊天区背后出现流体光效 + 点线网格 + 鲸鱼 | 已生效 |
+| 外观切到亮色 → 出现亮色变体 | 已生效 |
+| 关掉开关背景立刻消失 | 正常 |
 
-## What it changes
+## 改了什么
 
-| | Stock DSH | This skin |
+| | 出厂 DSH | 本皮肤 |
 |---|---|---|
-| Page background | flat | fluid light + dot grid + digital whale |
-| Dark palette | built-in dark | homepage deep-blue (#0a0a0a base) |
-| Light palette | built-in light | light fluid ramp with slate grid/whale |
-| Sidebar | solid | translucent glass |
-| Composer | solid | unchanged (stock) |
+| 页面背景 | 纯色 | 流体光效 + 点线网格 + 数字鲸鱼 |
+| 深色配色 | 自带深色 | 首页深海蓝（#0a0a0a 基底） |
+| 亮色配色 | 自带亮色 | 浅色流体 + 深灰蓝网格/鲸鱼 |
+| 侧栏 | 实底 | 半透明玻璃 |
+| 输入区 | 实底 | 不动（保持出厂原样） |
 
-Turning the skin off or uninstalling restores the stock look immediately.
+关掉或卸载后，出厂样式立刻恢复。
 
-## What it does not do
+## 不做的事
 
-- Change layout or information density
-- Change brand colors, favicon or desktop shell icons
-- Animate when `prefers-reduced-motion` is on; grid and whale hide below 768px
-- headless / TUI has no UI — not needed there
+- 不改布局和信息密度
+- 不改品牌色、标签页图标或桌面壳图标
+- `prefers-reduced-motion` 时不动画；768px 以下隐藏网格与鲸鱼
+- headless / TUI 没有界面，不必装
 
-## License
+## 许可
 
 MIT
