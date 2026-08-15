@@ -35,7 +35,7 @@ Open **Settings → General → Homepage Skin**. The green dot next to the title
 | Dark palette | built-in dark | homepage deep-blue (#0a0a0a base) |
 | Light palette | built-in light | light fluid ramp with slate grid/whale |
 | Sidebar | solid | translucent glass |
-| Composer | solid | terminal-style glass card with window dots |
+| Composer | solid | homepage-style glass (20% black + 24px blur), keeps the original 22px radius |
 
 Turning the skin off or uninstalling restores the stock look immediately.
 
