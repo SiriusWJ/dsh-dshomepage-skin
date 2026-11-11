@@ -1,4 +1,4 @@
-# dsh-desktop-skin
+# dsh-dshomepage-skin
 
 给 **DeepSeek Harness 桌面版（0.2.x）** 换上首页同款背景：WebGL 流体光效、点线网格、数字点云鲸鱼，深色 / 亮色两套配色。
 
@@ -22,7 +22,7 @@
 - 外壳选择器不再绑定 0.1 的 CSS Module 哈希类名（`.pI_x6G_*`）。0.2.x 改为按稳定的 `data-slot` 契约定位：`[data-slot="root"] > div`（AppFrame）、`[data-slot="sidebar"]`、`[data-slot="main.conversation"]`，旧类名保留为回退，因此 `dsh web` 0.1.x 也能用。
 - 补上 0.2.x 桌面端新增的不透明层：Windows 标题栏下 `frame` / `centerCol` 的底色、标题栏拖拽条 `:before`。
 - 兼容性声明换成 `engines.dsh` + 0.2.2 的 peerDependencies（否则 0.2.2 启动时会直接按版本不兼容跳过插件）。
-- 插件名 / 设置命名空间 / localStorage key 改为 `dsh-desktop-skin`，可与上游插件同时共存。
+- 插件名 / 设置命名空间 / localStorage key 改为 `dsh-dshomepage-skin`，可与上游插件同时共存。
 
 ## 安装
 
@@ -31,7 +31,7 @@
 直接从 GitHub 安装（写入 desktop profile 后重启桌面端）：
 
 ```sh
-dsh plugin --profile desktop add github:SiriusWJ/dsh-desktop-skin
+dsh plugin --profile desktop add github:SiriusWJ/dsh-dshomepage-skin
 ```
 
 也可以在「插件」页用 GitHub 地址添加。`dshmarket` 需要先被 awesome-dsh-plugin 收录（仓库需 ≥10 commits 且 ≥1 天），收录后可直接在插件市场搜索。
@@ -39,7 +39,7 @@ dsh plugin --profile desktop add github:SiriusWJ/dsh-desktop-skin
 ### dsh web
 
 ```sh
-dsh plugin --profile web add github:SiriusWJ/dsh-desktop-skin
+dsh plugin --profile web add github:SiriusWJ/dsh-dshomepage-skin
 ```
 
 ## 使用
@@ -61,14 +61,14 @@ dsh plugin --profile web add github:SiriusWJ/dsh-desktop-skin
 
 ### 验证记录（2026-11-11，DSH 0.2.2-rc.1）
 
-- 临时 profile（`skinlab`，从 shipped web 模板创建）+ 本地 link 安装本包后重启：页面成功挂载 `data-dsh-desktop-skin` 门控属性与 3 个画布，`[data-slot="root"] > div` 背景计算值为 `rgba(0,0,0,0)`。
+- 临时 profile（`skinlab`，从 shipped web 模板创建）+ 本地 link 安装本包后重启：页面成功挂载 `data-dsh-dshomepage-skin` 门控属性与 3 个画布，`[data-slot="root"] > div` 背景计算值为 `rgba(0,0,0,0)`。
 - 设置 → 通用 → 首页皮肤 · 桌面版：默认「关闭」按钮（即已开启），点击后变「打开」且背景立即消失，再点击恢复。
 - 深 / 浅两套配色均按 `body[data-ds-dark-theme]` 自动切换，截图见 `docs/compare-dark.png`、`docs/compare-light.png`（1576×860，取自同版本 `dsh web` 页面）。
 - 未覆盖项：真实桌面窗口的 Windows 标题栏层未截图复核（选择器按 0.2.2 的 `[data-windows-titlebar]` 规则写入，重启桌面端后需目视确认）。
 
 ## 发布
 
-仓库带 tag 触发的 npm 发布 workflow（`.github/workflows/publish.yml`）。推 `v*` tag 前在仓库 Secrets 配好 `NPM_TOKEN`（Granular/Classic publish token，勾选 bypass 2FA），否则 Action 会在 publish 步骤失败。市场收录不是安装前提，`github:SiriusWJ/dsh-desktop-skin` 可直接装。
+仓库带 tag 触发的 npm 发布 workflow（`.github/workflows/publish.yml`）。推 `v*` tag 前在仓库 Secrets 配好 `NPM_TOKEN`（Granular/Classic publish token，勾选 bypass 2FA），否则 Action 会在 publish 步骤失败。市场收录不是安装前提，`github:SiriusWJ/dsh-dshomepage-skin` 可直接装。
 
 ## 目录
 

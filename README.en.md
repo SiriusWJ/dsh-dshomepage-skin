@@ -1,4 +1,4 @@
-# dsh-desktop-skin
+# dsh-dshomepage-skin
 
 The DeepSeek Harness homepage background — WebGL fluid light, dot grid and a digital point-cloud whale — for the **DSH 0.2.x desktop app** and `dsh web`. Dark and light palettes included.
 
@@ -22,14 +22,14 @@ Changes since upstream 0.1.13:
 - Shell selectors no longer hard-code the 0.1 CSS Module hashes (`.pI_x6G_*`). 0.2.x is addressed through the stable `data-slot` contract — `[data-slot="root"] > div` (AppFrame), `[data-slot="sidebar"]`, `[data-slot="main.conversation"]` — with the old class names kept as fallbacks, so `dsh web` 0.1.x still works.
 - Covers the opaque layers the 0.2.x desktop shell adds: the frame / center column fill under the Windows title bar and the title-bar drag strip (`:before`).
 - Declares `engines.dsh` plus 0.2.2 peer dependencies; without that, 0.2.2 skips the bundle as version-incompatible at boot.
-- Plugin name, settings namespace and localStorage key are `dsh-desktop-skin`, so it can coexist with the upstream plugin.
+- Plugin name, settings namespace and localStorage key are `dsh-dshomepage-skin`, so it can coexist with the upstream plugin.
 
 ## Install
 
 Desktop (recommended) — install straight from GitHub, then restart the desktop app:
 
 ```sh
-dsh plugin --profile desktop add github:SiriusWJ/dsh-desktop-skin
+dsh plugin --profile desktop add github:SiriusWJ/dsh-dshomepage-skin
 ```
 
 You can also add that GitHub spec from the Plugins page. `dshmarket` listing requires an awesome-dsh-plugin entry (repo age ≥1 day and ≥10 commits); once listed it is searchable in the market.
@@ -37,7 +37,7 @@ You can also add that GitHub spec from the Plugins page. `dshmarket` listing req
 `dsh web`:
 
 ```sh
-dsh plugin --profile web add github:SiriusWJ/dsh-desktop-skin
+dsh plugin --profile web add github:SiriusWJ/dsh-dshomepage-skin
 ```
 
 ## Usage
@@ -50,7 +50,7 @@ Settings → General → **Homepage Skin · Desktop**. On by default; turning it
 
 ### Verification (2026-11-11, DSH 0.2.2-rc.1)
 
-- Installed from a local path into a throwaway profile and restarted: the page mounts `data-dsh-desktop-skin`, three canvases, and `[data-slot="root"] > div` computes to a transparent background.
+- Installed from a local path into a throwaway profile and restarted: the page mounts `data-dsh-dshomepage-skin`, three canvases, and `[data-slot="root"] > div` computes to a transparent background.
 - Settings → General shows **Homepage Skin · Desktop**; toggling off removes the background immediately and toggling on restores it.
 - Both palettes follow `body[data-ds-dark-theme]`; screenshots in `docs/` were captured from the same-version `dsh web` page (1576×860).
 - Not covered: the desktop window's Windows title-bar layer was not screenshot-verified; the `[data-windows-titlebar]` rules need a visual check after restarting the desktop app.
