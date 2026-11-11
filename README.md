@@ -22,7 +22,7 @@
 - 外壳选择器不再绑定 0.1 的 CSS Module 哈希类名（`.pI_x6G_*`）。0.2.x 改为按稳定的 `data-slot` 契约定位：`[data-slot="root"] > div`（AppFrame）、`[data-slot="sidebar"]`、`[data-slot="main.conversation"]`，旧类名保留为回退，因此 `dsh web` 0.1.x 也能用。
 - 补上 0.2.x 桌面端新增的不透明层：Windows 标题栏下 `frame` / `centerCol` 的底色、标题栏拖拽条 `:before`。
 - 兼容性声明换成 `engines.dsh` + 0.2.2 的 peerDependencies（否则 0.2.2 启动时会直接按版本不兼容跳过插件）。
-- 插件名 / 设置命名空间 / localStorage key 改为 `dsh-dshomepage-skin`，可与上游插件同时共存。
+- 插件名 / 门控属性改为 `dsh-dshomepage-skin` / `data-dsh-dshomepage-skin`，可与上游插件同时共存。
 
 ## 安装
 
@@ -44,7 +44,7 @@ dsh plugin --profile web add github:SiriusWJ/dsh-dshomepage-skin
 
 ## 使用
 
-设置 → 通用 → **首页皮肤 · 桌面版**，标题旁绿点表示已开启。默认开启；关掉开关后所有画布与样式立即移除，恢复出厂外观。
+安装并重启后自动生效，没有设置开关；卸载或禁用插件后所有画布与样式立即移除，恢复出厂外观。
 
 - 深 / 亮配色跟随自带「外观」设置（`body[data-ds-dark-theme]`）。
 - `prefers-reduced-motion: reduce` 时保持静态画面，不跑动画。
@@ -56,13 +56,14 @@ dsh plugin --profile web add github:SiriusWJ/dsh-dshomepage-skin
 | --- | --- |
 | 侧栏、对话区背后出现流体光效 + 点线网格 + 鲸鱼 | 已生效 |
 | 外观切到深色 → 深海蓝配色；亮色 → 浅色变体 | 已生效 |
-| 关掉开关背景立刻消失，卸载后恢复出厂 | 正常 |
-| 设置 → 通用里出现「首页皮肤 · 桌面版」行 | 插件已加载 |
+| 安装并重启后自动出现背景，无需任何设置 | 已生效 |
+| 卸载或禁用插件后背景立即消失，恢复出厂 | 正常 |
 
 ### 验证记录（2026-11-11，DSH 0.2.2-rc.1）
 
 - 临时 profile（`skinlab`，从 shipped web 模板创建）+ 本地 link 安装本包后重启：页面成功挂载 `data-dsh-dshomepage-skin` 门控属性与 3 个画布，`[data-slot="root"] > div` 背景计算值为 `rgba(0,0,0,0)`。
-- 设置 → 通用 → 首页皮肤 · 桌面版：默认「关闭」按钮（即已开启），点击后变「打开」且背景立即消失，再点击恢复。
+- 本版（0.1.1）去掉了设置开关：bundle 加载即无条件启用，teardown 时移除画布与样式，因此不需要也不提供 `settings.general.item` 槽位注册。
+- `npm test`（零依赖 smoke，`test/smoke.cjs`）：bundle id 正确、不 require 任何模块、`inject = []`、样式按门控属性注入、teardown 后样式被移除。
 - 深 / 浅两套配色均按 `body[data-ds-dark-theme]` 自动切换，截图见 `docs/compare-dark.png`、`docs/compare-light.png`（1576×860，取自同版本 `dsh web` 页面）。
 - 未覆盖项：真实桌面窗口的 Windows 标题栏层未截图复核（选择器按 0.2.2 的 `[data-windows-titlebar]` 规则写入，重启桌面端后需目视确认）。
 

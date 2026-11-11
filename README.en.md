@@ -42,7 +42,7 @@ dsh plugin --profile web add github:SiriusWJ/dsh-dshomepage-skin
 
 ## Usage
 
-Settings → General → **Homepage Skin · Desktop**. On by default; turning it off removes every canvas and style immediately.
+Takes effect as soon as the app starts — there is no settings switch. Uninstalling or disabling the plugin removes every canvas and style immediately.
 
 - Dark / light palette follows the built-in appearance (`body[data-ds-dark-theme]`).
 - `prefers-reduced-motion: reduce` keeps a static frame without animation.
@@ -51,7 +51,8 @@ Settings → General → **Homepage Skin · Desktop**. On by default; turning it
 ### Verification (2026-11-11, DSH 0.2.2-rc.1)
 
 - Installed from a local path into a throwaway profile and restarted: the page mounts `data-dsh-dshomepage-skin`, three canvases, and `[data-slot="root"] > div` computes to a transparent background.
-- Settings → General shows **Homepage Skin · Desktop**; toggling off removes the background immediately and toggling on restores it.
+- This build has no settings row: the skin is always on while the bundle is loaded, and teardown on uninstall removes every canvas and style.
+- `npm test` (zero-dependency smoke test) checks the bundle id, that nothing is `require`d, the empty `inject` list, the gated style injection and teardown cleanup.
 - Both palettes follow `body[data-ds-dark-theme]`; screenshots in `docs/` were captured from the same-version `dsh web` page (1576×860).
 - Not covered: the desktop window's Windows title-bar layer was not screenshot-verified; the `[data-windows-titlebar]` rules need a visual check after restarting the desktop app.
 

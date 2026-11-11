@@ -1,6 +1,6 @@
 {
   "name": "dsh-dshomepage-skin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DeepSeek Harness homepage-style background skin for the DSH 0.2.x desktop app and dsh web: WebGL fluid, dot grid and digital whale, dark and light variants.",
   "license": "MIT",
   "author": "yushi-xxh",
@@ -26,6 +26,9 @@
   ],
   "type": "module",
   "main": "lib/index.js",
+  "scripts": {
+    "test": "node test/smoke.cjs"
+  },
   "exports": {
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
@@ -48,17 +51,8 @@
       "patch": "./cordis.patch.yml"
     },
     "client": {
-      "inject": [
-        "@deepseek-ai/dsh-client-locale",
-        "@deepseek-ai/dsh-client-ui-theme"
-      ],
       "platform": "web",
       "immediately": true
     }
-  },
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "@deepseek-ai/dsh-client-ui-theme": "^0.2.2-rc.1",
-    "@deepseek-ai/dsh-client-locale": "^0.2.2-rc.1"
   }
 }
