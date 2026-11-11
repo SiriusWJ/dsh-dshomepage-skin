@@ -15,13 +15,13 @@
 | 目标运行时 | DSH `>=0.2.2-rc.1 <0.3.0`（`engines.dsh`） |
 | 实测版本 | DSH 0.2.2-rc.1（桌面壳 44.7.0，Windows x64） |
 | 另一端 | `dsh web` 0.2.x 同样可用 |
-| 依赖 | 仅用客户端槽位 `settings.general.item`、`ctx.locale`、`@deepseek-ai/dsh-client-store` |
+| 依赖 | 无：bundle 不 require 任何模块，也不使用 slots / locale / store |
 
 相对于上游 0.1.13 的改动：
 
 - 外壳选择器不再绑定 0.1 的 CSS Module 哈希类名（`.pI_x6G_*`）。0.2.x 改为按稳定的 `data-slot` 契约定位：`[data-slot="root"] > div`（AppFrame）、`[data-slot="sidebar"]`、`[data-slot="main.conversation"]`，旧类名保留为回退，因此 `dsh web` 0.1.x 也能用。
 - 补上 0.2.x 桌面端新增的不透明层：Windows 标题栏下 `frame` / `centerCol` 的底色、标题栏拖拽条 `:before`。
-- 兼容性声明换成 `engines.dsh` + 0.2.2 的 peerDependencies（否则 0.2.2 启动时会直接按版本不兼容跳过插件）。
+- 兼容性声明改用 `engines.dsh`（`>=0.2.2-rc.1 <0.3.0`）；0.2.2 启动时的版本检查因此放行，不再需要 peerDependencies。
 - 插件名 / 门控属性改为 `dsh-dshomepage-skin` / `data-dsh-dshomepage-skin`，可与上游插件同时共存。
 
 ## 安装
@@ -67,6 +67,16 @@ dsh plugin --profile web add github:SiriusWJ/dsh-dshomepage-skin
 - 深 / 浅两套配色均按 `body[data-ds-dark-theme]` 自动切换，截图见 `docs/compare-dark.png`、`docs/compare-light.png`（1576×860，取自同版本 `dsh web` 页面）。
 - 未覆盖项：真实桌面窗口的 Windows 标题栏层未截图复核（选择器按 0.2.2 的 `[data-windows-titlebar]` 规则写入，重启桌面端后需目视确认）。
 
+## 插件显示信息
+
+插件管理与设置页在**不激活插件**的前提下读取显示信息：
+
+- `locale/en.json`、`locale/zh.json` 的 `meta.title` / `meta.description`（标题、说明；缺省回退到包名与 `package.json` 的 description）
+- `package.json` 的 `icon`（也可改用 `./icon` 导出）——SVG/PNG/JPEG/WebP，≤256 KiB
+- 「支持的 DSH 版本」写在 `engines.dsh`（`>=0.2.2-rc.1 <0.3.0`），说明文字里也直接写明 0.2.2-rc.1+，详情页另有 README
+
+已安装列表里会显示：图标、标题、说明、当前版本。
+
 ## 发布
 
 仓库带 tag 触发的 npm 发布 workflow（`.github/workflows/publish.yml`）。推 `v*` tag 前在仓库 Secrets 配好 `NPM_TOKEN`（Granular/Classic publish token，勾选 bypass 2FA），否则 Action 会在 publish 步骤失败。市场收录不是安装前提，`github:SiriusWJ/dsh-dshomepage-skin` 可直接装。
@@ -75,9 +85,11 @@ dsh plugin --profile web add github:SiriusWJ/dsh-dshomepage-skin
 
 ```
 lib/index.js         宿主半端（no-op loader entry）
-lib/client.js        浏览器半端：引擎 + 槽位注册
+lib/client.js        浏览器半端：引擎 + 外壳透明样式
 cordis.patch.yml     bundle 补丁层
-package.json          dsh.bundle / dsh.client 清单、engines.dsh
+locale/*.json        插件管理显示的标题 / 说明（meta.title / meta.description）
+icon.svg             插件管理显示的图标
+package.json         dsh.bundle / dsh.client 清单、icon、engines.dsh
 ```
 
 ## 许可与致谢
