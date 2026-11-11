@@ -33,6 +33,8 @@ const body = {
 const window = {
   __ModuleLoader__: { load(cfg) { captured = cfg; } },
   addEventListener() {},
+  setInterval: (fn) => { intervals.push(fn); return intervals.length; },
+  clearInterval() {},
   matchMedia: () => ({ matches: false }),
   innerWidth: 1200,
   innerHeight: 800,
