@@ -1,6 +1,6 @@
 {
   "name": "dsh-dshomepage-skin",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "DeepSeek Harness homepage-style background skin for the DSH 0.2.x desktop app and dsh web: WebGL fluid, dot grid and digital whale, dark and light variants.",
   "license": "MIT",
   "author": "yushi-xxh",
@@ -43,6 +43,8 @@
     "cordis.patch.yml",
     "locale/*.json",
     "icon.svg",
+    "icon.png",
+    "screenshots.json",
     "README.md",
     "README.en.md",
     "LICENSE",

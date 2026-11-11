@@ -1,12 +1,12 @@
 # dsh-dshomepage-skin
 
-The DeepSeek Harness homepage background — WebGL fluid light, dot grid and a digital point-cloud whale — for the **DSH 0.2.x desktop app** and `dsh web`. Dark and light palettes included.
+A **DeepSeek Harness (DSH) skin plugin** providing the homepage background — WebGL fluid light, dot grid and a digital point-cloud whale — for the **DSH 0.2.x desktop app** and `dsh web`. Dark and light palettes included.
 
 This repository is a DSH 0.2.2-rc.1 port of [yushi-xxh/dsh-homepage-skin](https://github.com/yushi-xxh/dsh-homepage-skin) (MIT). The visuals stay the same; the shell selectors, version declarations and desktop-only layers were rewritten so the skin actually renders in the current desktop build.
 
 | Dark | Light |
 | --- | --- |
-| ![dark](docs/compare-dark.png) | ![light](docs/compare-light.png) |
+| ![dark](docs/preview-dark.png) | ![light](docs/preview-light.png) |
 
 ## Compatibility
 
@@ -19,7 +19,7 @@ This repository is a DSH 0.2.2-rc.1 port of [yushi-xxh/dsh-homepage-skin](https:
 
 Changes since upstream 0.1.13:
 
-- Shell selectors no longer hard-code the 0.1 CSS Module hashes (`.pI_x6G_*`). 0.2.x is addressed through the stable `data-slot` contract — `[data-slot="root"] > div` (AppFrame), `[data-slot="sidebar"]`, `[data-slot="main.conversation"]` — with the old class names kept as fallbacks, so `dsh web` 0.1.x still works.
+- Shell selectors no longer hard-code the 0.1 CSS Module hashes (`.pI_x6G_*`). 0.2.x is addressed through the stable `data-slot` contract — `[data-slot="root"] > div` (AppFrame), `[data-slot="sidebar"]`, `[data-slot="main.conversation"]` — with the old class names kept only as selector fallbacks; the declared support range remains DSH `>=0.2.2-rc.1 <0.3.0`.
 - Covers the opaque layers the 0.2.x desktop shell adds: the frame / center column fill under the Windows title bar and the title-bar drag strip (`:before`).
 - Declares `engines.dsh` (`>=0.2.2-rc.1 <0.3.0`) so the 0.2.2 boot compatibility check admits the bundle; no peer dependencies are needed.
 - Plugin name and gate attribute are `dsh-dshomepage-skin` / `data-dsh-dshomepage-skin`, so it can coexist with the upstream plugin.
@@ -32,7 +32,7 @@ Desktop (recommended) — install straight from GitHub, then restart the desktop
 dsh plugin --profile desktop add github:SiriusWJ/dsh-dshomepage-skin
 ```
 
-You can also add that GitHub spec from the Plugins page. `dshmarket` listing requires an awesome-dsh-plugin entry (repo age ≥1 day and ≥10 commits); once listed it is searchable in the market.
+You can also add that GitHub spec from the Plugins page. `dshmarket` synchronizes entries from awesome-dsh-plugin; current submission rules require a repository age of at least one day.
 
 `dsh web`:
 
@@ -53,8 +53,8 @@ Takes effect as soon as the app starts — there is no settings switch. Uninstal
 - Installed from a local path into a throwaway profile and restarted: the page mounts `data-dsh-dshomepage-skin`, three canvases, and `[data-slot="root"] > div` computes to a transparent background.
 - This build has no settings row: the skin is always on while the bundle is loaded, and teardown on uninstall removes every canvas and style.
 - `npm test` (zero-dependency smoke test) checks the bundle id, that nothing is `require`d, the empty `inject` list, the gated style injection and teardown cleanup.
-- Both palettes follow `body[data-ds-dark-theme]`; screenshots in `docs/` were captured from the same-version `dsh web` page (1576×860).
-- Not covered: the desktop window's Windows title-bar layer was not screenshot-verified; the `[data-windows-titlebar]` rules need a visual check after restarting the desktop app.
+- Both palettes follow `body[data-ds-dark-theme]`; screenshots in `docs/` were captured from a fresh `dsh web` environment with an isolated data home (1912×908), showing only the default workspace and an empty session, without a signed-in account.
+- Version 0.1.11 was screenshot-verified in the Windows desktop Plugins page: the native sidebar toggle remains left of the Application menu, separate from the whale logo, and can collapse and reopen the sidebar. The sidebar ancestor no longer has `backdrop-filter`, and the extra floating escape handle was removed.
 
 ## Plugin display metadata
 
@@ -63,6 +63,8 @@ The Plugin Manager and Settings read display metadata without activating the plu
 - `meta.title` / `meta.description` in `locale/en.json` and `locale/zh.json` (falling back to the package name and the `package.json` description)
 - `icon` in `package.json` (or an `./icon` export) — SVG/PNG/JPEG/WebP, ≤256 KiB
 - Supported DSH versions live in `engines.dsh` (`>=0.2.2-rc.1 <0.3.0`); the description also states 0.2.2-rc.1+, and the detail page shows the README
+- `icon.png` is the 256×256 storefront tile exported from the same licensed SVG; `screenshots.json` declares the dark/light screenshots
+- GitHub topics and package keywords include `dsh-plugin`; the manifest declares `dsh.bundle.patch` and `dsh.client` for installation through DSH
 
 The installed list shows the icon, title, description and current version.
 
