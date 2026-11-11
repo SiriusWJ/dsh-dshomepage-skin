@@ -1,16 +1,19 @@
 {
-  "name": "dsh-homepage-skin",
-  "version": "0.1.13",
-  "description": "DeepSeek Harness homepage-style background skin: WebGL fluid, dot grid and digital whale. Dark and light variants included.",
+  "name": "dsh-desktop-skin",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness homepage-style background skin for the DSH 0.2.x desktop app and dsh web: WebGL fluid, dot grid and digital whale, dark and light variants.",
   "license": "MIT",
   "author": "yushi-xxh",
+  "contributors": [
+    "SiriusWJ"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yushi-xxh/dsh-homepage-skin.git"
+    "url": "git+https://github.com/SiriusWJ/dsh-desktop-skin.git"
   },
-  "homepage": "https://github.com/yushi-xxh/dsh-homepage-skin#readme",
+  "homepage": "https://github.com/SiriusWJ/dsh-desktop-skin#readme",
   "bugs": {
-    "url": "https://github.com/yushi-xxh/dsh-homepage-skin/issues"
+    "url": "https://github.com/SiriusWJ/dsh-desktop-skin/issues"
   },
   "keywords": [
     "deepseek-harness",
@@ -18,6 +21,7 @@
     "dsh-plugin",
     "theme",
     "skin",
+    "desktop",
     "homepage"
   ],
   "type": "module",
@@ -32,15 +36,18 @@
     "lib/client.js",
     "cordis.patch.yml",
     "README.md",
-    "README.en.md"
+    "README.en.md",
+    "LICENSE"
   ],
+  "engines": {
+    "dsh": ">=0.2.2-rc.1 <0.3.0"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
     },
     "client": {
       "inject": [
-        "@deepseek-ai/dsh-client-store",
         "@deepseek-ai/dsh-client-locale",
         "@deepseek-ai/dsh-client-ui-theme"
       ],
@@ -50,9 +57,7 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "@deepseek-ai/dsh-client-ui-theme": "^0.1.2-rc.1",
-    "@deepseek-ai/dsh-client-locale": "^0.1.2-rc.1",
-    "@deepseek-ai/dsh-client-ui-slots": "^0.1.2-rc.1",
-    "@deepseek-ai/dsh-client-store": "^0.1.2-rc.1"
+    "@deepseek-ai/dsh-client-ui-theme": "^0.2.2-rc.1",
+    "@deepseek-ai/dsh-client-locale": "^0.2.2-rc.1"
   }
 }

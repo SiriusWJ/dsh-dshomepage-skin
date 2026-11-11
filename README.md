@@ -1,55 +1,88 @@
-# dsh-homepage-skin
+# dsh-desktop-skin
 
-[中文](README.md) · [English](README.en.md)
+给 **DeepSeek Harness 桌面版（0.2.x）** 换上首页同款背景：WebGL 流体光效、点线网格、数字点云鲸鱼，深色 / 亮色两套配色。
 
-给 `dsh web` 界面铺上 DeepSeek Harness 首页同款背景：WebGL 流体光效、点线网格和数字点云鲸鱼。
+本仓库基于 [yushi-xxh/dsh-homepage-skin](https://github.com/yushi-xxh/dsh-homepage-skin)（MIT）适配 DSH 0.2.2-rc.1 的桌面端与 Web 端：视觉与交互沿用原作，重写了外壳选择器与版本声明，使其在当前桌面版里能正确透出背景。
 
-![深色主题](docs/compare-dark.png)
-![亮色主题](docs/compare-light.png)
+| 深色 | 亮色 |
+| --- | --- |
+| ![深色](docs/compare-dark.png) | ![亮色](docs/compare-light.png) |
 
-深色沿用首页深海蓝配色；亮色是适配变体（浅色流体 + 深灰蓝网格与鲸鱼）。亮 / 暗 / 跟随系统仍走自带的「外观」。
+## 兼容性
+
+| 项 | 值 |
+| --- | --- |
+| 目标运行时 | DSH `>=0.2.2-rc.1 <0.3.0`（`engines.dsh`） |
+| 实测版本 | DSH 0.2.2-rc.1（桌面壳 44.7.0，Windows x64） |
+| 另一端 | `dsh web` 0.2.x 同样可用 |
+| 依赖 | 仅用客户端槽位 `settings.general.item`、`ctx.locale`、`@deepseek-ai/dsh-client-store` |
+
+相对于上游 0.1.13 的改动：
+
+- 外壳选择器不再绑定 0.1 的 CSS Module 哈希类名（`.pI_x6G_*`）。0.2.x 改为按稳定的 `data-slot` 契约定位：`[data-slot="root"] > div`（AppFrame）、`[data-slot="sidebar"]`、`[data-slot="main.conversation"]`，旧类名保留为回退，因此 `dsh web` 0.1.x 也能用。
+- 补上 0.2.x 桌面端新增的不透明层：Windows 标题栏下 `frame` / `centerCol` 的底色、标题栏拖拽条 `:before`。
+- 兼容性声明换成 `engines.dsh` + 0.2.2 的 peerDependencies（否则 0.2.2 启动时会直接按版本不兼容跳过插件）。
+- 插件名 / 设置命名空间 / localStorage key 改为 `dsh-desktop-skin`，可与上游插件同时共存。
 
 ## 安装
 
-```sh
-# npm（推荐）
-dsh plugin --profile web add dsh-homepage-skin
+### 桌面版（推荐）
 
-# 或从 GitHub
-dsh plugin --profile web add github:yushi-xxh/dsh-homepage-skin
+插件市场里安装：
+
+```
+SiriusWJ/dsh-desktop-skin
 ```
 
-重启 `dsh web`，再硬刷新浏览器（Ctrl+Shift+R）。默认开启。
+或命令行（写入 desktop profile 后重启桌面端）：
 
-打开 **设置 → 通用 → 首页皮肤**。标题旁绿点表示已开启。
+```sh
+dsh plugin --profile desktop add github:SiriusWJ/dsh-desktop-skin
+```
 
-## 装完怎么验
+### dsh web
+
+```sh
+dsh plugin --profile web add github:SiriusWJ/dsh-desktop-skin
+```
+
+## 使用
+
+设置 → 通用 → **首页皮肤 · 桌面版**，标题旁绿点表示已开启。默认开启；关掉开关后所有画布与样式立即移除，恢复出厂外观。
+
+- 深 / 亮配色跟随自带「外观」设置（`body[data-ds-dark-theme]`）。
+- `prefers-reduced-motion: reduce` 时保持静态画面，不跑动画。
+- 768px 以下窄窗口隐藏鲸鱼与网格，避免遮挡内容。
+
+## 验证
 
 | 现象 | 结论 |
-|---|---|
-| 聊天区背后出现流体光效 + 点线网格 + 鲸鱼 | 已生效 |
-| 外观切到亮色 → 出现亮色变体 | 已生效 |
-| 关掉开关背景立刻消失 | 正常 |
+| --- | --- |
+| 侧栏、对话区背后出现流体光效 + 点线网格 + 鲸鱼 | 已生效 |
+| 外观切到深色 → 深海蓝配色；亮色 → 浅色变体 | 已生效 |
+| 关掉开关背景立刻消失，卸载后恢复出厂 | 正常 |
+| 设置 → 通用里出现「首页皮肤 · 桌面版」行 | 插件已加载 |
 
-## 改了什么
+### 验证记录（2026-11-11，DSH 0.2.2-rc.1）
 
-| | 出厂 DSH | 本皮肤 |
-|---|---|---|
-| 页面背景 | 纯色 | 流体光效 + 点线网格 + 数字鲸鱼 |
-| 深色配色 | 自带深色 | 首页深海蓝（#0a0a0a 基底） |
-| 亮色配色 | 自带亮色 | 浅色流体 + 深灰蓝网格/鲸鱼 |
-| 侧栏 | 实底 | 半透明玻璃 |
-| 输入区 | 实底 | 不动（保持出厂原样） |
+- 临时 profile（`skinlab`，从 shipped web 模板创建）+ 本地 link 安装本包后重启：页面成功挂载 `data-dsh-desktop-skin` 门控属性与 3 个画布，`[data-slot="root"] > div` 背景计算值为 `rgba(0,0,0,0)`。
+- 设置 → 通用 → 首页皮肤 · 桌面版：默认「关闭」按钮（即已开启），点击后变「打开」且背景立即消失，再点击恢复。
+- 深 / 浅两套配色均按 `body[data-ds-dark-theme]` 自动切换，截图见 `docs/compare-dark.png`、`docs/compare-light.png`（1576×860，取自同版本 `dsh web` 页面）。
+- 未覆盖项：真实桌面窗口的 Windows 标题栏层未截图复核（选择器按 0.2.2 的 `[data-windows-titlebar]` 规则写入，重启桌面端后需目视确认）。
 
-关掉或卸载后，出厂样式立刻恢复。
+## 发布
 
-## 不做的事
+仓库带 tag 触发的 npm 发布 workflow（`.github/workflows/publish.yml`）。推 `v*` tag 前在仓库 Secrets 配好 `NPM_TOKEN`（Granular/Classic publish token，勾选 bypass 2FA），否则 Action 会在 publish 步骤失败。市场收录不是安装前提，`github:SiriusWJ/dsh-desktop-skin` 可直接装。
 
-- 不改布局和信息密度
-- 不改品牌色、标签页图标或桌面壳图标
-- `prefers-reduced-motion` 时不动画；768px 以下隐藏网格与鲸鱼
-- headless / TUI 没有界面，不必装
+## 目录
 
-## 许可
+```
+lib/index.js         宿主半端（no-op loader entry）
+lib/client.js        浏览器半端：引擎 + 槽位注册
+cordis.patch.yml     bundle 补丁层
+package.json          dsh.bundle / dsh.client 清单、engines.dsh
+```
 
-MIT
+## 许可与致谢
+
+MIT。视觉、着色器与鲸鱼点云实现来自 [yushi-xxh/dsh-homepage-skin](https://github.com/yushi-xxh/dsh-homepage-skin)，版权归原作者；本仓库只做 DSH 0.2.x 桌面端适配与维护。
