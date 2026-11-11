@@ -28,17 +28,13 @@
 
 ### 桌面版（推荐）
 
-插件市场里安装：
-
-```
-SiriusWJ/dsh-desktop-skin
-```
-
-或命令行（写入 desktop profile 后重启桌面端）：
+直接从 GitHub 安装（写入 desktop profile 后重启桌面端）：
 
 ```sh
 dsh plugin --profile desktop add github:SiriusWJ/dsh-desktop-skin
 ```
+
+也可以在「插件」页用 GitHub 地址添加。`dshmarket` 需要先被 awesome-dsh-plugin 收录（仓库需 ≥10 commits 且 ≥1 天），收录后可直接在插件市场搜索。
 
 ### dsh web
 

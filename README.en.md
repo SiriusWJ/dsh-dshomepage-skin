@@ -26,11 +26,13 @@ Changes since upstream 0.1.13:
 
 ## Install
 
-Desktop (recommended): install `SiriusWJ/dsh-desktop-skin` from the plugin market, or
+Desktop (recommended) — install straight from GitHub, then restart the desktop app:
 
 ```sh
 dsh plugin --profile desktop add github:SiriusWJ/dsh-desktop-skin
 ```
+
+You can also add that GitHub spec from the Plugins page. `dshmarket` listing requires an awesome-dsh-plugin entry (repo age ≥1 day and ≥10 commits); once listed it is searchable in the market.
 
 `dsh web`:
 
