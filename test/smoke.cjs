@@ -93,6 +93,12 @@ if (head.children.length !== 1) throw new Error('style not injected');
 const css = head.children[0].textContent;
 if (!css.includes('body[data-dsh-dshomepage-skin]')) throw new Error('gate attribute missing from CSS');
 if (css.includes('dsh-dshomepage-skin-btn')) throw new Error('settings button CSS still present');
+for (const rule of css.split('}')) {
+  if (rule.includes(':has(> [data-slot="sidebar"])') && /(?:backdrop-filter|\btransform)\s*:/.test(rule)) {
+    throw new Error('sidebar ancestor must not capture fixed titlebar controls');
+  }
+}
+if (css.includes('dsh-dshomepage-skin-expand')) throw new Error('native sidebar toggle must not be replaced');
 if (mod.inject.length !== 0) throw new Error('inject should be empty, got ' + JSON.stringify(mod.inject));
 if (intervals.length === 0) throw new Error('engine did not start polling for the frame');
 

@@ -49,7 +49,7 @@ dsh plugin --profile web add github:SiriusWJ/dsh-dshomepage-skin
 - 深 / 亮配色跟随自带「外观」设置（`body[data-ds-dark-theme]`）。
 - `prefers-reduced-motion: reduce` 时保持静态画面，不跑动画。
 - 768px 以下窄窗口隐藏鲸鱼与网格，避免遮挡内容。
-- Windows 桌面端收起侧栏后，左上方会浮出「展开侧栏」按钮（也可用 `Ctrl+Alt+B`），用来回到侧栏；展开后按钮自动消失。主面板页面（插件、自动化任务等）没有自带的侧栏开关，这个兜底按钮就是为这种情况准备的。
+- Windows 标题栏保留应用原生的侧栏开关；插件页、自动化任务页也可以直接收起/展开。皮肤不会给侧栏祖先添加 `backdrop-filter`，以免改变原生 `position: fixed` 按钮的定位与裁剪范围。0.1.11 已移除此前错误诊断后添加的额外浮动把手。
 
 ## 验证
 
